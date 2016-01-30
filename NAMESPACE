@@ -1,0 +1,17 @@
+import(stats,lattice,grid)
+importFrom(graphics, plot)
+export(
+  strucplot,
+  panel.bars,
+  strucParseFormula
+  )
+S3method(strucplot, default)
+S3method(strucplot, formula)
+S3method(strucplot, list)
+S3method(strucplot, data.frame)
+S3method(strucplot, matrix)
+S3method(strucplot, lm)
+S3method(print, structured)
+S3method(plot, structured)
+S3method(summary, structured)
+S3method(print, summary.structured)
