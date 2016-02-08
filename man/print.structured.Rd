@@ -19,29 +19,29 @@
 \arguments{
 \item{x, object}{The object to be displayed or summarized.}
 
-\item{legendLoc}{An optional location of a legend describing the plot layout 
-  to be used as a legend on the trellis plot. Note that a text legend is 
-  \emph{always} printed on the console. If used, this argument specified the 
+\item{legendLoc}{An optional location of a legend describing the plot layout
+  to be used as a legend on the trellis plot. Note that a text legend is
+  \emph{always} printed on the console. If used, this argument specified the
   position of a legend in the trellis display. It must be one of
-  \code{"left"}, \code{"right"}, \code{"top"}, \code{"bottom"}, or 
-  \code{"newpage"} (matching is done using \code{\link{match.arg}}, so \code{ 
-  legendLoc} can be abbreviated). Any of the first four of these will become
-  the name of a component of the \code{legend} argument of the 
-  \code{\link[lattice]{xyplot}} call, and so must not conflict with any in a 
-  \code{legend} argument that may already be part of the 
+  \code{"left"}, \code{"right"}, \code{"top"}, \code{"bottom"}, or
+  \code{"newpage"} (matching is done using \code{\link{match.arg}}, so
+  \code{legendLoc} can be abbreviated). Any of the first four of these will
+  become the name of a component of the \code{legend} argument of the
+  \code{\link[lattice]{xyplot}} call, and so must not conflict with any in a
+  \code{legend} argument that may already be part of the
   \code{\link{strucplot}} call.
-  
+
 If \code{legendLoc = "newpage"}, the legend will be plotted centered on a new
 trellis page.}
 
-\item{legend}{A \emph{function} that constructs a grob to use as a plot legend. It 
+\item{legend}{A \emph{function} that constructs a grob to use as a plot legend. It
 must accept at least 2 arguments, \code{"struc"} and \code{"legendLoc"}, which
 will be passed the \code{"structure"} attribute of the object to
 be plotted and the \code{legendLoc} argument above.
-Additional arguments may be passed in the \dots argument of the print 
-call (below). 
+Additional arguments may be passed in the \dots argument of the print
+call (below).
 
-The default is the unexported \code{\link{defaultStrucLegend}} function. 
+The default is the unexported \code{\link{defaultStrucLegend}} function.
 Its Help file should be consulted for its full argument list.}
 
 \item{abbrevLength}{Default = 0. A non-zero value of this argument is used as
@@ -49,7 +49,7 @@ the \code{minlength} argument of the \code{\link{abbreviate}} function to
 abbreviate the names of the conditioning factors both in the automatically
 generated console legend and the optional plot legend.}
 
-\item{...}{Further arguments to pass down to either the \code{legend} function 
+\item{...}{Further arguments to pass down to either the \code{legend} function
 or \code{\link[lattice]{print.trellis}}, which should be consulted for details.
 Care should be taken to ensure that the names of arguments do not coincide.
 See \code{\link{defaultStrucLegend}} for arguments for the default \code{legend}
@@ -72,7 +72,7 @@ require(datasets)
 # quakes data
 #
 # Create and save plot
-out <- strucplot(lat ~ long|cut(mag,5)*cut(depth,4), data = quakes, 
+out <- strucplot(lat ~ long|cut(mag,5)*cut(depth,4), data = quakes,
   col="blue", main = "Earthquake locations, by magnitude and depth")
 
 # Summary:
@@ -82,7 +82,7 @@ summary(out)
    print(out)
 
 # Add legends to the plot on either right or bottom (note partial matching)
-   print(out, legendLoc = "right") 
+   print(out, legendLoc = "right")
    print(out, legendLoc = "b")
 #
 # Abbreviate the conditioning factor names
