@@ -1,0 +1,29 @@
+Changes in stripless 1.0-2
+===========================
+
+  * Some bug fixes, especially in handling a ‘groups’ argument to the strucplot()
+    call. A ‘groups = NULL’ argument specification has been added to strucplot()
+    as part of the fix.
+
+
+  * A package vignette has been added.
+
+
+  * Changed the 'spacings' argument to strucplot() to allow either a single vector
+    or a list with a single component, in which case it is replicated for the
+    other direction. Also non-integer values now are documented to work(they
+    worked before but were not documented to do so).
+
+
+  * The 'abbrevLength' argument to print() methods and defaultStrucLegend()
+    has been extended to allow control of both factor names and levels.
+
+
+  * print.structured() and defaultStrucLegend() have gained optional 'lbl' and
+    'legendLab'arguments, respectively, to allow users to change or omit "Plot
+    Structure" legend titles. Both share new 'heading' and 'miss' arguments for
+    further user customization.
+
+
+
+

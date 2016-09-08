@@ -2,63 +2,74 @@
 % Please edit documentation in R/strucLegends.R
 \name{defaultStrucLegend}
 \alias{defaultStrucLegend}
-\alias{displayStruc}
-\title{Construct default structure legend to plot on a \code{strucplot}
-display.}
+\title{Default legend function for \code{strucplot} displays.}
 \usage{
 defaultStrucLegend(struc, legendLoc = c("top", "right", "bottom", "left",
-  "newpage"), lbl = "PLOT STRUCTURE", heading = c("Horizontal", "Vertical"),
-  miss = "None", cex.font = 1, cex.lbl = 1.25, col = "black",
-  abbrevLength = 0, ...)
-
-displayStruc(struc, miss = "No Conditioning", heading = c("Horizontal",
-  "Vertical"), abbrevLength = 0)
+  "newpage"), legendLab = NA, heading = c("Horizontal", "Vertical"),
+  miss = "No Conditioning", abbrevLength = c(0, 0), cex.font = 1,
+  cex.lab = 1.25, col = "black", ...)
 }
 \arguments{
 \item{struc}{The "structure" attribute of a \code{strucplot} object}
 
-\item{legendLoc}{One of c("top","right","bottom","left","newpage")
-The first 4 specify on which side of the trellis display to place the legend.
-The last indicates that the legend will be plotted at the center of a
-separate page.}
+\item{legendLoc}{One of c("top","right","bottom","left","newpage") The first 4 specify
+on which side of the trellis display to place the legend. The last indicates that the
+legend will be plotted at the center of a separate page.}
 
-\item{lbl}{A character string title for the legend. 
-Default = \code{"PLOT STRUCTURE"}}
+\item{legendLab}{A character string title for the legend. A value of
+\code{NA} omits the title. Default = \code{NA}}
 
-\item{heading}{A character vector of length 2 giving the headings for the 
-horizontal and vertical conditioning variables portions of the legend.
-Default = \code{c("Horizontal", "Vertical")}}
+\item{heading}{A character vector of length 2 giving the headings for the horizontal
+and vertical conditioning variables portions of the legend. Default =
+\code{c("Horizontal", "Vertical")}.}
 
-\item{miss}{A character string to use when a conditioning variable is absent.
-Default = \code{"None"}}
+\item{miss}{A character string to use when there is no conditioning either horizontally
+or vertically. Default = \code{"No Conditioning"}}
 
-\item{cex.font}{Multiplier for text font size. Default = 1}
+\item{abbrevLength}{Default = \code{c(0,0)}. Either a length 2 vector or a named list
+to control lengths of factor names and levels in the legend. If a length 2 vector, it
+gives the \code{minlength} argument for the abbreviate function for abbreviating all
+the factor names and their levels, in that order. A value of 0 for either means
+"don't abbreviate." For back compatibility, a single numeric y will also be accepted
+and changed to \code{c(y,0)}. If a named list, the names must be those of of the
+conditioning factors to abbreviate, and values length 2 vectors as above to
+control abbreviation lengths for the corresponding factor names and levels.}
 
-\item{cex.lbl}{Multiplier for label font size. Default = 1.25}
+\item{cex.font}{Multiplier for text font size in a trellis legend. Default = 1.}
 
-\item{col}{Text color for text. Default = \code{"black"}}
+\item{cex.lab}{Multiplier for legend title font size in a trellis legend.
+Default = 1.25.}
 
-\item{abbrevLength}{\code{minlength} argument for \code{\link{abbreviate}} 
-function to abbreviate names of the conditioning factors. Default = 0 = no 
-abbreviation.}
+\item{col}{Text color for text in a trellis legend. Default = \code{"black"}.}
 
-\item{...}{Additional arguments to be used in a \code{gp} list for
-controlling text appearance. See \code{\link[grid]{gpar}} for possibilities.}
+\item{...}{Additional arguments to be used in a \code{gp} list for controlling text
+appearance in a trellis legend. See \code{\link[grid]{gpar}} for possibilities.}
 }
 \value{
-A text grob that can be included as part of the \code{strucplot}
-trellis plot.
+A text grob that can be included as part of the \code{strucplot} trellis plot.
 }
 \description{
-A structure legend is always printed on the console. It can also
-be optionally added to the trellis plot. This non-exported function
-constructs a default legend for this option.
+A structure legend is always printed on the console. It can also be
+  optionally added to the trellis plot. This function constructs a default
+  legend for this option.
 }
-\section{Functions}{
-\itemize{
-\item \code{displayStruc}: An auxiliary function that constructs the
-character strings for the conditioning variables.
-}}
+\examples{
+# Controlling the console and plot legends
+ library(datasets) ## for the barley data
+#
+ out <- strucplot(variety~yield|year*site,data=barley, horizontal=TRUE,
+   panel=panel.dotplot, col = "darkblue",
+   scales = list(alternat = 1, y = list(cex=.5)),
+   spacings = list(x=0, y=.5))
+#
+# Default with legend on top; note that no title is the plot legend default
+  print(out, legendLoc = "t", abbrev= list(site = c(0,4)))
+#
+# Include title on plot and reduce default font sizes in red text
+  print(out, legendLoc = "T", abbrev = list(site = c(0,6)),
+   legendLab = "Structure", cex.lab = 1, cex.font = .75, col = "darkred" )
+
+}
 \seealso{
 \code{\link{print.structured}}
 }

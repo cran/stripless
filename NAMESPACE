@@ -3,7 +3,9 @@ importFrom(graphics, plot)
 export(
   strucplot,
   panel.bars,
-  strucParseFormula
+  strucParseFormula,
+  defaultStrucLegend,
+  displayStruc
   )
 S3method(strucplot, default)
 S3method(strucplot, formula)

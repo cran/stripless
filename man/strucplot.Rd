@@ -12,12 +12,13 @@
 \usage{
 strucplot(obj, ...)
 
-\method{strucplot}{formula}(obj, data = list(), xyLayout = list(),
-  spacings = list(x = 0:9, y = 0:9), center = FALSE, ...)
+\method{strucplot}{formula}(obj, data = list(), groups = NULL,
+  xyLayout = list(), spacings = list(x = 0:9, y = 0:9), center = FALSE,
+  ...)
 
 \method{strucplot}{default}(...)
 
-\method{strucplot}{data.frame}(obj, col = "darkblue", ...)
+\method{strucplot}{data.frame}(obj, col = "darkblue", groups = NULL, ...)
 
 \method{strucplot}{list}(obj, ...)
 
@@ -52,6 +53,8 @@ that is a valid envir argument in eval, e.g., a list or an environment)
 containing values for any variables in the formula, as well as groups and
 subset if applicable. If not found in data, or if data is unspecified, the
 variables are looked for in the environment of the formula.}
+
+\item{groups}{The \code{groups} parameter of \code{\link[lattice]{xyplot}}}
 
 \item{xyLayout}{In its most general form, a list with named "x" and "y"
  components, either or both of which can be missing (or NULL). If there are
@@ -111,38 +114,44 @@ variables are looked for in the environment of the formula.}
  \code{xyLayout = list(x = c(2,4,6), y = c(1,3,5))}, which is different than the
  previous, since order matters!}
 
-\item{spacings}{A \strong{list} with x and y components that are nondecreasing
-integer sequences. The ith value in the sequence gives the spacing in
-character heights between the sets of panels at each level for the ith
-conditioning variable in the component's direction. See the
-\strong{Overview} for further explanation.}
+\item{spacings}{A list with x and y components that are nondecreasing
+sequences of positive vaues. The ith value in the sequence gives the spacing
+in character heights between the sets of panels at each level for the ith
+conditioning variable in the component's direction. If either a single
+vector or a list with single component is given, it is replicated. See the
+\strong{Overview} for further explanation. Default is \code{list(x=0:9,
+y=0:9)}}
 
-\item{center}{Logical, default TRUE. If the conditioning factors constitute a
-2-level design with a center point and center is TRUE, a compact trellis
+\item{center}{Logical, default FALSE. If the conditioning factors constitute
+a 2-level design with a center point and center is TRUE, a compact trellis
 plot that omits panels for the missing settings of the factors is drawn. If
 FALSE or the design is not of this form, all panels are shown, which may be
 informative in any case to better visualize the design sparsity.}
 
 \item{col}{Fill color for the data frame method.}
 
-\item{newdata}{For the \code{lm} method (and objects inheriting from the
-\code{lm} class). The 'newdata' argument for the associated \code{predict}
+\item{newdata}{For the \code{lm} method and objects inheriting from the
+\code{lm} class. The 'newdata' argument for the associated \code{predict}
 method. Consult \code{\link[stats]{predict.lm}} for details.}
 
 \item{ylab}{For the \code{lm} method. Optional y axis label for predicted values.}
 
 \item{predictArgs}{For the \code{lm} method. A \strong{list} of optional named
-arguments for the relevant \code{predict} method.}
+arguments for the relevant \code{predict} method. These are will be used as part
+of the \code{args} list when invoking the relevant predict method using
+\code{\link{do.call}}.}
 
 \item{\dots}{Further arguments to panel functions, methods, or
 \code{\link[lattice]{xyplot}}.}
 }
 \value{
-The formula method returns an object of type c("structured",
- "trellis); or c("doe","structured","trellis") for 2-level designs with a
- center point. This is a trellis object with additional \code{structure} and
- \code{formula} attributes. Other methods may extend the class to allow
- special print/plot methods.
+The formula method returns an object of type \code{c("structured", "trellis")}; or
+ \code{c("doe","structured","trellis")} for 2-level designs with a center point. This is a
+ trellis object with additional \code{structure} and \code{formula} attributes. The lm
+ method returns a class of \code{c("modelFit","structured","trellis")}. At present, this
+ extension is ignored, but future print/plot methods may take advantage of it. The other
+ methods return the same object as the formula method.
+
 
  The \code{structure} attribute provides xyLayout information. It is a list
  with \code{x} and \code{y} components, each of which in turn is a list, one
@@ -178,9 +187,11 @@ A structured display is a trellis display without strip
 from class "lm"
 }}
 \note{
-Because xyLayout and the number of levels in the conditioning variables
+Because 'xyLayout' and the number of levels in the conditioning variables
  determine the plot structure, a 'layout' argument in the call will be
- ignored.
+ ignored. Other \code{xyplot} arguments that are ignored are 'skip','between',
+ 'drop.unused.levels', 'strip','perm.cond',and 'index.cond'. All other \code{xyplot}
+ should work as expected.
 }
 \section{Overview}{
  The trellis display paradigm breaks down when there are
@@ -229,17 +240,19 @@ Because xyLayout and the number of levels in the conditioning variables
  = list(x = 1:2, y = 3:4)}. It splits the conditioning variables as evenly as
  possible into 2 groups with the x component getting the first 2 variables,
  f1 and f2, and the y component getting the second 2 variables, f3 and f4.
- (if there are an odd number of variables, the x component gets one more
- variable than the y). This means the levels of the x variables, f1 and f2,
- vary across each row; and the levels of the y variables, f3 and f4, vary
- down each column.  Since there are 4 combinations of levels for the x
- variables and 12 for y, this gives a 12 row by 4 column display.
+ (if there are an odd number of variables, the x component gets one more variable than
+ the y). This means the levels of the x variables, f1 and f2, vary from left to right
+ across each row. For the y variables, if \code{as.table = TRUE}, the default, the
+ levels of the y variables, f3 and f4, vary from top to bottom down each column;
+ otherwise if \code{as.table = FALSE}, from bottom to top up each column. Since there
+ are 4 combinations of levels for the x variables and 12 for y, this gives a 12 row by
+ 4 column display.
 
  The panels are displayed in each direction in reverse lexicographic order,
  where the 'alphabets' are the factor levels. This means that the first
  variable changes the fastest; the second the next fastest, and so on. Using
  (i,j) to denote setting in which the first factor is at the ith level and
- the second is at the jth, this translates to:
+ the second is at the jth, this translates to (for \code{as.table = TRUE}):
 
  \describe{ \item{Row ordering}{ (f1,f2): (1,1), (2,1), (1,2), (2,2)}
  \item{Column ordering from top down}{ (f3, f4): ((1,1), (2,1), (3,1), (1,2),
@@ -263,7 +276,7 @@ Because xyLayout and the number of levels in the conditioning variables
 
  For the example, this means that the row spacing would look like ('X'
  indicates a panel): XX  XX . And for columns it would be going down: XXX XXX
- XXX  XXX . The spacings can be different for x and y, but this is usually
+ XXX XXX . The spacings can be different for x and y, but this is usually
  unnecessary.
 }
 
