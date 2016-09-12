@@ -1,19 +1,19 @@
 ---
 title: 'Stripless: An Alternative Display for Conditioning Plots'
 author: "Bert Gunter"
-date: "`r Sys.Date()`"
-bibliography: mybib.bib
-output: 
-  rmarkdown::html_vignette:
-    toc:  true
-    number_sections: true
-  pdf_document:
-    toc: true
-    highlight: default
+date: '`r Sys.Date()`'
 
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    number_sections: true
+#  pdf_document:
+#   toc: true
+#    number_sections: false
+bibliography: Bibliography.bib
 vignette: >
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{Stripless: An Alternative Display for Conditioning Plots}
+  %\VignetteEngine{knitr::rmarkdown}  
+  %\VignetteIndexEntry{Stripless: An Alternative Display for Conditioning Plots}  
   \usepackage[utf8]{inputenc}
 ---
 

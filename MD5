@@ -1,6 +1,6 @@
-13b874b564fc35b5553e5f043401c8da *DESCRIPTION
+fbf001329afcb4aa6d2fa14af271a5cb *DESCRIPTION
 1439f41a18ea937f91f72da05f3b972e *NAMESPACE
-888171d5686360c7b2ab002ffa68b590 *NEWS
+757bccdd9ad3a946b3030b72b91bd4cd *NEWS
 509e3ce9fe5cd2312096b013a4266843 *R/displayStruc.R
 eff1fb632db2b16900d8f31fc32cf021 *R/main.R
 c2af2d6a83967050c6318c6ff272fc85 *R/panelFuncs.R
@@ -9,10 +9,12 @@ a1fdd18f2fbecd4a13e524d393e0483a *R/print.structured.R
 efad5362af0979ecc48bb3b6367726b4 *R/stripless.R
 ca9b9858ffc115d13d8decc9c9b6970a *R/strucLegends.R
 2104a4718350ef51cc251defc832a870 *R/strucParseFormula.R
-8be81d782a25b0d2efe7031c1617e47a *build/vignette.rds
+e3fb50b4c91d069787258410c2a0d1e5 *build/vignette.rds
+74a5df670fe4113553bf55b88f5a41b9 *inst/doc/NEWS.html
 963a41bb5dd8f5d8b3750279502b8b9e *inst/doc/stripless_vignette.R
-4cbe5dbf9d70a2712bceb17cc7d9cf19 *inst/doc/stripless_vignette.Rmd
-3820f7738342ae1601c14a13e2a578a2 *inst/doc/stripless_vignette.pdf
+41eda7eaad0057f9bac25240adc89dc5 *inst/doc/stripless_vignette.Rmd
+4478d1b2c53666f3194fcba2bfa41981 *inst/doc/stripless_vignette.html
+daa5e20b0c7ad358f83878ffd8f2bae9 *inst/doc/vignette.pdf
 fc2cf8dc15d036337a3733a2573ed593 *man/Examples/strucplot_exmpl.R
 b20f1a38b7db6a0381b97bd6ed80e3fd *man/defaultStrucLegend.Rd
 3af67475bfbdb6d4422fe8e1d8fbc2ea *man/displayStruc.Rd
@@ -22,6 +24,5 @@ d820131e56a5c34c1e5d56de0ac97662 *man/stripless-internal.Rd
 0b3916583e091fc6891fe496760cd227 *man/stripless-package.Rd
 7b60be6f27ef0c2a14f418256c0301a8 *man/strucParseFormula.Rd
 9b8dee875f83d66abc0aaa218f14420e *man/strucplot.Rd
-ad0eadb8b0e33f25307c888c901afa38 *vignettes/MyBib.bib
-4cbe5dbf9d70a2712bceb17cc7d9cf19 *vignettes/stripless_vignette.Rmd
-7eccde7f0c05205bfd4600fd03990148 *vignettes/stripless_vignette.html
+47480069a7f477b1b5d5525322ae8848 *vignettes/Bibliography.bib
+41eda7eaad0057f9bac25240adc89dc5 *vignettes/stripless_vignette.Rmd

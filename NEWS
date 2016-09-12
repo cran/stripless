@@ -1,5 +1,5 @@
-Changes in stripless 1.0-2
-===========================
+# Changes in stripless 1.0-2
+
 
   * Some bug fixes, especially in handling a ‘groups’ argument to the strucplot()
     call. A ‘groups = NULL’ argument specification has been added to strucplot()
@@ -23,6 +23,12 @@ Changes in stripless 1.0-2
     'legendLab'arguments, respectively, to allow users to change or omit "Plot
     Structure" legend titles. Both share new 'heading' and 'miss' arguments for
     further user customization.
+
+# Changes in stripless 1.0-3
+
+* Switched to compiled pdf vignettes in "doc" directory due to failure of vignettes to properly compile on *nix systems
+
+
 
 
 
